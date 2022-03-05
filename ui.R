@@ -35,7 +35,7 @@ ui <- fluidPage(
         div(style="display: inline-block;vertical-align:top; margin-top:7px;",
             HTML('<span title="Enter all characters at which text can be split into separate Tweets.\nMatch new lines with \\n"><strong>Separate Tweets at these characters:&nbsp</strong></span>')),
         div(style="display: inline-block;vertical-align:top",
-            textInput('sep', NULL, '\\n ,;', width = "12ch")), br(),
+            textInput('sep', NULL, '\\n.:;', width = "12ch")), br(),
         div(style="display: inline-block;vertical-align:top; margin-top:7px;",
             HTML('<span title="Use \'NUM\' as the current Tweet number and \'TOTAL\' for the total number of Tweets."><strong>Tweet number prefix:&nbsp</strong></span>')),
         div(style="display: inline-block;vertical-align:top",
