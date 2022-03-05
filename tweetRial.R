@@ -27,7 +27,6 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      # uiOutput('test'),
       column(
         12,
         textAreaInput('text', NULL, placeholder = 'Enter text here', width = "100%", height = '50vh'),
@@ -67,7 +66,6 @@ server <- function(input, output) {
         suffix <- str_replace_all(str_replace_all(input$suffix, 'NUM', as.character(i)), 'TOTAL', 'ßü')
         prefix <- str_replace_all(str_replace_all(input$prefix, 'NUM', as.character(i)), 'TOTAL', 'ßü')
         max_len <- 280 - str_count(suffix) - str_count(prefix)
-        print(paste('max_len is now ', max_len))
         if (input$sep == '') {
           split_by <- '.'
         } else {
@@ -78,19 +76,15 @@ server <- function(input, output) {
         } else {
           split_start <- splits[[i - 1]][2] + 1
         }
-        print(is.numeric(split_start))
         split_max <- str_sub(input$text, split_start, split_start + max_len -1)
         split_end <- str_locate_all(split_max, split_by)[[1]][,'start'] 
         if (identical(split_end, integer(0)) && str_count(input$text) > max_len) {
-          print('correcting integer(0)')
           split_end <- max_len
           msg <- 'These separators don\'t allow splits of less than 280 characters; change text or separators.'
         } else {
           msg <- ''
           split_end <- max(split_end)
         }
-        print(c(split_by, split_start, split_end))
-
         if (i > 1) {
           split_end <- split_end + splits[[i - 1]][2]
           split_start <- splits[[i - 1]][2] + 1
@@ -102,7 +96,6 @@ server <- function(input, output) {
         i <- i + 1
       }
       append(splits, c('msg' = msg))
-      # splits
     }
   })
   
@@ -114,7 +107,6 @@ server <- function(input, output) {
   })
   
   output$message <- renderUI({
-    print('rend msg')
     HTML(paste0('<font color="grey"><i>', split_list()[['msg']],'</i></font></div>'))
   })
   
@@ -129,27 +121,12 @@ server <- function(input, output) {
       do.call(tagList, text_output_list)
     }
   })
-  
-  # output$test <- renderUI({
-  #   div(icon(verify_fa = FALSE,"angle-up"), HTML('test'))
-  # })
-  
-  observeEvent(input$cp1, {
-    print('hi')
-  })
 
   observe({
-    # print(split_list())
     for (i in seq_len(max(0,length(split_list()) -1))) {
       local({
         my_i <- i
         fieldname <- paste("field", my_i, sep="")
-        print('rendering tweets')
-        print(dipsaus::html_asis(str_sub(
-          input$text, split_list()[[my_i]][1], split_list()[[my_i]][2]
-        ), space = FALSE))
-        print(is.numeric(split_list()[[my_i]][1]))
-        print(is.numeric(split_list()[[my_i]][2]))
         part_str <- dipsaus::html_asis(str_sub(input$text, 
                                                split_list()[[my_i]][1], 
                                                split_list()[[my_i]][2]), 
@@ -166,8 +143,6 @@ server <- function(input, output) {
                     HTML('<strong>You</strong> @your_twitter · ',
                          format(Sys.Date(), "%e %b"))
                     ),
-                # actionButton(inputId = paste0('cp', my_i), label = NULL, icon = icon(verify_fa = FALSE,'copy'))
-                # rclipButton(inputId = paste0('cp', my_i), label = NULL, 'asdf' , icon(verify_fa = FALSE,'copy'))
                 rclipButton(inputId = paste0('cp', my_i), label = NULL, part_str, icon = icon("copy"))
                 
             ),
@@ -187,7 +162,6 @@ server <- function(input, output) {
             HTML('<hr style="width:90%;border-color: #8e8e8e; margin-top:5px; margin-bottom:16px"/>')
           )
         })
-        print('u')
       })
     }
   })
