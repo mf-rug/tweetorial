@@ -2,6 +2,7 @@ library(tidyverse)
 library(shiny)
 library(shinyWidgets)
 library(rclipboard)
+library(htmltools)
 
 ui <- fluidPage(
   rclipboardSetup(),

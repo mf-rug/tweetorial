@@ -74,10 +74,9 @@ server <- function(input, output) {
       local({
         my_i <- i
         fieldname <- paste("field", my_i, sep="")
-        part_str <- dipsaus::html_asis(str_sub(input$text, 
+        part_str <- htmltools::htmlEscape(str_sub(input$text, 
                                                split_list()[[my_i]][1], 
-                                               split_list()[[my_i]][2]), 
-                                       space = FALSE)
+                                               split_list()[[my_i]][2]))
         suffix <- str_replace_all(str_replace_all(input$suffix, 'NUM', as.character(my_i)), 'TOTAL', as.character(length(split_list()) -1))
         prefix <- str_replace_all(str_replace_all(input$prefix, 'NUM', as.character(my_i)), 'TOTAL', as.character(length(split_list()) -1))
         part_str <- paste0(prefix, part_str, suffix)
