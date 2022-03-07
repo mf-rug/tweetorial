@@ -11,7 +11,9 @@ server <- function(input, output) {
       
       if (str_detect(input$text, url_reg)) {
         msg2 <- 'Your text contains links. These will be counted as 23 characters according to <a href = "https://help.twitter.com/en/using-twitter/how-to-tweet-a-link" target = "_blank">Twitters url shortening rules</a>.'
-      } 
+      }  else {
+        msg2 <- ''
+      }
       
       s1 <- data.frame('l' = str_split(url_cor_text,'')[[1]])
       split_by <- ' '
