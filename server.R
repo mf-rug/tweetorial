@@ -8,7 +8,6 @@ server <- function(input, output) {
     } else {
       # replace any urls with 23 'a's, text doesn't matter here as we're just counting
       url_cor_text <- str_replace(input$text, url_reg, paste0(rep('a', 23), collapse = ''))
-      
       if (str_detect(input$text, url_reg)) {
         msg2 <- 'Your text contains links. These will be counted as 23 characters according to <a href = "https://help.twitter.com/en/using-twitter/how-to-tweet-a-link" target = "_blank">Twitters url shortening rules</a>.'
       }  else {
