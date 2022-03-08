@@ -110,6 +110,7 @@ server <- function(input, output) {
         } else {
           part_str_addurl <- part_str
         }
+        print('test')
         output[[fieldname]] <- renderUI({
           div(
             div(class='header', 
@@ -125,7 +126,7 @@ server <- function(input, output) {
             div(style = "line-height:100%;", br()),
             HTML(paste0(
               '<p style = "background-color:white;">',
-              part_str_addurl,
+              str_replace_all(part_str_addurl, '\\n', '<br>'),
               '</p>')),
             div(style = "line-height:25%;", br()),
             div(class='header', 
