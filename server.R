@@ -121,7 +121,7 @@ server <- function(input, output) {
                 rclipButton(inputId = paste0('cp', my_i), label = NULL, part_str_addurl, icon = icon("copy"),title="copy subtweet to clipboard")
                 
             ),
-            div(style="border-left:2px solid #cacaca;margin-left: 1.32em; padding-left: 2.5em;",
+            div(style="border-left:2px solid #cacaca;margin-left: 1.18em; padding-left: 2.5em;",
               div(style = "line-height:100%;", br()),
               HTML(paste0(
                 '<p style = "background-color:white;">',
