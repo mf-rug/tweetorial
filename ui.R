@@ -17,7 +17,9 @@ ui <- fluidPage(
           margin: 0 auto;
         }"))
   ),
-  headerPanel("TweetRial"),
+  HTML("<title>TweetRial</title>"),
+  div(style = 'margin-top:-10px;', class = 'col-sm-12', HTML("<h1>TweetRial</h1>")), theme = bslib::bs_theme(version = bslib::version_default(), bootswatch = "cerulean"),
+  column(12, div(style = 'margin-top:-15px;margin-bottom:10px', HTML('<i><small>An R shiny app to create Twitter threads from longer texts.</small></i>'))),
   sidebarLayout(
     position = 'right',
     sidebarPanel(
@@ -29,7 +31,7 @@ ui <- fluidPage(
     mainPanel(
       column(
         12,
-        textAreaInput('text', NULL, placeholder = 'Enter text here', width = "100%", height = '50vh'),
+        textAreaInput('text', NULL, placeholder = 'Start typing some text here or paste', width = "100%", height = '50vh'),
         uiOutput('length'),
         HTML('<strong>Options</strong>'), HTML('<hr style="border-color: #cacaca; margin-bottom:10px; margin-top:2px;"/>'),
         div(style="display: inline-block;vertical-align:top; margin-top:7px;",

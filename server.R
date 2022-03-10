@@ -110,7 +110,6 @@ server <- function(input, output) {
         } else {
           part_str_addurl <- part_str
         }
-        print('test')
         output[[fieldname]] <- renderUI({
           div(
             div(class='header', 
@@ -120,23 +119,26 @@ server <- function(input, output) {
                     HTML('<strong>You</strong> @your_twitter · ',
                          format(Sys.Date(), "%e %b"))
                     ),
-                rclipButton(inputId = paste0('cp', my_i), label = NULL, part_str_addurl, icon = icon("copy"))
+                rclipButton(inputId = paste0('cp', my_i), label = NULL, part_str_addurl, icon = icon("copy"),title="copy subtweet to clipboard")
                 
             ),
-            div(style = "line-height:100%;", br()),
-            HTML(paste0(
-              '<p style = "background-color:white;">',
-              str_replace_all(part_str_addurl, '\\n', '<br>'),
-              '</p>')),
-            div(style = "line-height:25%;", br()),
-            div(class='header', 
-              div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'comment-o')), HTML('&nbsp0')),
-              div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'retweet')), HTML('&nbsp0')),
-              div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'heart-o')), HTML('&nbsp0')),
-              div(style="display: inline-block;vertical-align:top", HTML('&nbsp')),
-              div(style="display: inline-block;vertical-align:top", HTML(paste0('<i><font color="grey";>',str_count(part_str), '/280</font></i>'))),
-            ),
-            HTML('<hr style="width:90%;border-color: #8e8e8e; margin-top:5px; margin-bottom:16px"/>')
+            div(style="border-left:2px solid #cacaca;margin-left: 1.32em; padding-left: 2.5em;",
+              div(style = "line-height:100%;", br()),
+              HTML(paste0(
+                '<p style = "background-color:white;">',
+                str_replace_all(part_str_addurl, '\\n', '<br>'),
+                '</p>')),
+              div(style = "line-height:25%;", br()),
+              div(class='header', 
+                div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'comment-o')), HTML('&nbsp0')),
+                div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'retweet')), HTML('&nbsp0')),
+                div(style="display: inline-block;vertical-align:top", a(icon(verify_fa = FALSE,'heart-o')), HTML('&nbsp0')),
+                div(style="display: inline-block;vertical-align:top", a(HTML('<i class="fa fa-sign-out fa-rotate-270" aria-hidden="true"></i>'))),
+                div(style="display: inline-block;vertical-align:top", HTML('&nbsp')),
+                div(style="display: inline-block;vertical-align:top", HTML(paste0('<i><font color="grey";>',str_count(part_str), '/280</font></i>'))),
+              ),
+              HTML('<hr style="border-color: #cacaca; margin-top:5px; margin-bottom:2px;padding-bottom:14px"/>')
+            )
           )
         })
       })
