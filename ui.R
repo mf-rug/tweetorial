@@ -24,7 +24,7 @@ ui <- fluidPage(
     position = 'right',
     sidebarPanel(
       id="sidebar",
-      style = "overflow-y:scroll; max-height: 85vh; position:relative;",
+      style = "overflow-y:scroll; max-height: 85vh; position:relative;", 
       uiOutput('TweetNums'),
       div(style = 'width:100%; padding:10px', uiOutput("preview"))
     ),

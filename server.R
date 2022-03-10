@@ -1,7 +1,6 @@
 server <- function(input, output) {
   
   url_reg <- 'https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_|\\+.~,#?&//=]*)'
-  
   split_list <- eventReactive(c(input$text, input$sep, input$suffix, input$prefix), {
     if (input$text == '') {
       list()
