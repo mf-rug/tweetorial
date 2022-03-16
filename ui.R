@@ -40,11 +40,14 @@ ui <- fluidPage(
         12,
         textAreaInput('text', NULL, placeholder = 'Start typing some text here or paste', width = "100%", height = '50vh'),
         div(class='header', 
-            div(style="display: inline-block;vertical-align:top; margin-top:-5px; margin-bottom:-2px",
-                pickerInput(inputId = 'emoji', label = HTML("<i><font color='grey'>Copy emoji to clipboard:</font></i>"), 
-                            choices = c(jis[!is.na(jis$vendor_twitter) & jis$qualified == 'fully-qualified', 'emoji'])$emoji,
-                            choicesOpt = list(subtext = (jis[!is.na(jis$vendor_twitter) & jis$qualified == 'fully-qualified', 'name'])$name), 
-                            selected = '', width = 'fit', options = list(`live-search` = TRUE, title = "🙂"))),
+            div(
+              div(style="display: inline-block;vertical-align:top; margin-top:-5px; margin-bottom:-2px",
+                  pickerInput(inputId = 'emoji', label = NULL, 
+                              choices = c(jis[!is.na(jis$vendor_twitter) & jis$qualified == 'fully-qualified', 'emoji'])$emoji,
+                              choicesOpt = list(subtext = (jis[!is.na(jis$vendor_twitter) & jis$qualified == 'fully-qualified', 'name'])$name), 
+                              selected = '🙂', width = 'auto', options = list(`live-search` = TRUE))),
+              div(style="display: inline-block;vertical-align:top; margin-top:-5px; margin-bottom:-2px", uiOutput('clip'))
+            ),
             div(style="display: inline-block;vertical-align:top; margin-top:-5px; margin-bottom:-2px",
                 uiOutput('length'))
         ),

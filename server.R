@@ -100,14 +100,18 @@ server <- function(input, output, session) {
     }
   })
 
-  observeEvent(input$emoji, {
-    if (input$emoji != '') {
-      clipr::write_clip(input$emoji)
-    }
-    updatePickerInput(session = getDefaultReactiveDomain(), inputId = 'emoji', selected = '')
-    session$sendCustomMessage(type="refocus",message=list(NULL))
-    }, ignoreInit = TRUE)
-
+  # observeEvent(input$emoji, {
+  #   if (input$emoji != '') {
+  #     clipr::write_clip(input$emoji)
+  #   }
+  #   updatePickerInput(session = getDefaultReactiveDomain(), inputId = 'emoji', selected = '')
+  #   session$sendCustomMessage(type="refocus",message=list(NULL))
+  #   }, ignoreInit = TRUE)
+  
+  output$clip <- renderUI({
+    rclipButton("clipbtn", HTML('<small><font color="grey">Copy emoji to clipboard</font></small>'), input$emoji, modal = FALSE, icon("copy"))
+  })
+  
   observe({
     for (i in seq_len(max(0,length(split_list()) -1))) {
       local({
